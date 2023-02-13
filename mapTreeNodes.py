@@ -29,6 +29,22 @@ def postOrder(root, result):
     postOrder(root.right,result)
     result.append(root.data)
 
+def orderAll(root, result, order):
+    if root:
+        if order == 'PRE':
+            result.append(root.data)
+
+        orderAll(root.left, result, order)
+        
+        if order == 'IN':
+            result.append(root.data)
+
+        orderAll(root.right, result, order)
+        
+        if order == 'POST':
+            result.append(root.data)
+
+
 # Elimina los nodos mandados
 def deleteNode(root,dataDel):
     """
@@ -117,12 +133,11 @@ def indexMap(hrz, vert):
   for x in range(len(resPr)):
     vert[resPr[x]] = hrz
 
-hrz = []
-vert = {}
-row = []
-column = []
+hrz, vert, row, column = [], {}, [], []
+
 map(row, column)
 indexMap(hrz,vert)
+
 #print(hrz)
 #print(vert)
 '''for x in column:
@@ -140,9 +155,22 @@ for x in vert:
         
         ls = []
 
-print("Information about the Node")
+orders = ['PRE','IN','POST']
+
+print("\nInformation about the Node")
 print("Large:       ", len(resPo))
 print("Cant Nodes:  ", len(nodes))
+
+lis = []
+for x in range(len(orders)):
+    orderAll(raiz, lis, orders[x])
+    print(lis)
+    lis = []
+
+orderAll(raiz, lis, 'PRE')
+print(raiz.data)
+
+
 '''
 
                             15
