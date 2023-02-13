@@ -63,15 +63,19 @@ def insertMany(root, obj):
             root.left = obj
 
 # Create a map with nodes
-def map(row,column):
-  for i in range(len(resPr)):
-    for j in range(len(resPr)):
-        row.append(resPr[j])     
-    column.append(row)
-    row = []
+def map(orderPr,row=[],column=[]):
+    """
+    Mapping the nodes
+    orderPr given like a list
+    """
+    for i in range(len(orderPr)):
+        for j in range(len(orderPr)):
+            row.append(orderPr[j])     
+        column.append(row)
+        row = []
 
-def indexMap(hrz, vert):
-  for x in range(len(resI)):
-    hrz.append(resI[x])
-  for x in range(len(resPr)):
-    vert[resPr[x]] = hrz
+def indexMap(orderIn, orderPr, vert,hrz=[]):
+    for x in range(len(orderIn)):
+        hrz.append(orderIn[x])
+    for x in range(len(orderPr)):
+        vert[orderPr[x]] = hrz
