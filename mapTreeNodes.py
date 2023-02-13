@@ -78,24 +78,24 @@ print(res)
 '''
 
 def insertMany(root, obj):
-  if root == None or root.data == obj.data:
-    return   
-  if obj.data > root.data:
-    if root.right != None:
-      insertMany(root.right,obj)
+    if root == None or root.data == obj.data:
+        return   
+    if obj.data > root.data:
+        if root.right != None:
+            insertMany(root.right,obj)
+        else:
+            root.right = obj
     else:
-      root.right = obj
-  else:
-    if root.left != None:
-      insertMany(root.left,obj)
-    else:
-      root.left = obj
+        if root.left != None:
+            insertMany(root.left,obj)
+        else:
+            root.left = obj
       
 
 nodes = [15,10,2,4,1,3,5,30,25,27,32,40,50]
 raiz = BSTNode(nodes[0])
 for x in nodes:
-  insertMany(raiz, BSTNode(x))  
+  insertMany(raiz, BSTNode(x))
 
 
 resI, resPr, resPo = [], [], []
@@ -120,23 +120,22 @@ postOrder(raiz,resPo)
 print(resI)
 print(resPo)'''
 
-def map(row,column):
+def map(row=[],column=[]):
   for i in range(len(resPr)):
     for j in range(len(resPr)):
         row.append(resPr[j])     
     column.append(row)
     row = []
 
-def indexMap(hrz, vert):
+def indexMap(vert,hrz=[]):
   for x in range(len(resI)):
     hrz.append(resI[x])
   for x in range(len(resPr)):
     vert[resPr[x]] = hrz
 
-hrz, vert, row, column = [], {}, [], []
-
-map(row, column)
-indexMap(hrz,vert)
+vert = {}
+map()
+indexMap(vert)
 
 #print(hrz)
 #print(vert)
