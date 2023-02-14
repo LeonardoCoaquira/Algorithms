@@ -1,21 +1,7 @@
 from BSTNode import *
 from CSVReader import *
 
-ls = readColumn('data.csv','Elo')
-
-root = BSTNode(ls[0])
-
-insertMany(root, ls)
-
-resPre, resIn, resPs = [], [], []
-preOr, preIn, prePs = orderAll(root, resPre, 'PRE'), orderAll(root, resIn, 'IN'), orderAll(root, resPs, 'POST')
-
-vert = {}
-map(resPre)
-indexMap(resIn, resPre,vert)
-view = printMapTwo(vert)
-
-from flask import Flask
+from flask import Flask, session
 from flask import url_for
 from flask import render_template, jsonify
 app = Flask(__name__)
@@ -26,7 +12,23 @@ def get():
 
 @app.route('/table')
 def table():
-    return render_template('table.html', size=len(vert), data=vert)
+    if 'table_data' not in session:  
+        ls = readColumn('data.csv','Elo')
+
+        root = BSTNode(ls[0])
+
+        insertMany(root, ls)
+
+        resPre, resIn, resPs = [], [], []
+        preOr, preIn, prePs = orderAll(root, resPre, 'PRE'), orderAll(root, resIn, 'IN'), orderAll(root, resPs, 'POST')
+
+        vert = {}
+        map(resPre)
+        indexMap(resIn, resPre,vert)
+        
+        session['table_data'] = cook
+  
+    return render_template('table.html',data=vert, cook=session['table_data'])
 
 if __name__ == '__main__':
     app.run(port=8080, debug=True, threaded=True)
