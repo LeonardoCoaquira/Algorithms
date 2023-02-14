@@ -1,0 +1,21 @@
+<style>
+    table {
+        height: 300px;
+        width: 300px;
+        text-align: center;
+        border: 2px solid black;
+    }
+    td {
+        border: 1px solid black;
+    }
+</style>
+<table>
+    {% for i in range(size) %}
+      <tr>
+      {% for j in range(size) %}
+        <td>{{ i }},{{ j }}</td>
+      {% endfor %}
+      </tr>
+    {% endfor %}
+</table>
+    

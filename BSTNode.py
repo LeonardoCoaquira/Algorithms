@@ -48,34 +48,58 @@ def deleteNode(root,dataDel):
     deleteNode(root.left,dataDel)
     deleteNode(root.right,dataDel)
 
-def insertMany(root, obj):
+def insertList(root, obj):
     if root == None or root.data == obj.data:
-        return   
+        return
     if obj.data > root.data:
         if root.right != None:
-            insertMany(root.right,obj)
+            insertList(root.right,obj)
         else:
             root.right = obj
     else:
         if root.left != None:
-            insertMany(root.left,obj)
+            insertList(root.left,obj)
         else:
             root.left = obj
 
 # Create a map with nodes
-def map(orderPr,row=[],column=[]):
+def map(preOrder,row=[],column=[]):
     """
     Mapping the nodes
-    orderPr given like a list
+    PreOrder given like a list
     """
-    for i in range(len(orderPr)):
-        for j in range(len(orderPr)):
-            row.append(orderPr[j])     
+    for i in range(len(preOrder)):
+        for j in range(len(preOrder)):
+            row.append(preOrder[j])     
         column.append(row)
         row = []
 
-def indexMap(orderIn, orderPr, vert,hrz=[]):
-    for x in range(len(orderIn)):
-        hrz.append(orderIn[x])
-    for x in range(len(orderPr)):
-        vert[orderPr[x]] = hrz
+def indexMap(inOrder, preOrder, vert,hrz=[]):
+    for x in range(len(inOrder)):
+        hrz.append(inOrder[x])
+    for x in range(len(preOrder)):
+        vert[preOrder[x]] = hrz
+
+def printMap(data):
+    for x in data:
+        for y in data[x]:
+            ls = ['']*len(data)
+            if x == data[x][data[x].index(y)]:
+                ls[data[x].index(y)] = x
+                print(ls)
+            
+            ls = []
+
+def printMapTwo(data):
+    for x in data:
+        for y in data[x]:
+            ls = ['']*len(data)
+            if x == data[x][data[x].index(y)]:
+                ls[data[x].index(y)] = x
+                print(ls)
+            
+            ls = []
+
+def insertMany(firstNode, listNodes):
+    for i in listNodes:
+        insertList(firstNode, BSTNode(i))

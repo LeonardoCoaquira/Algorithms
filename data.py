@@ -1,17 +1,11 @@
-import csv
-from BSTNode import BSTNode
-from BSTNode import insertMany, orderAll, indexMap, map
+from BSTNode import *
+from CSVReader import *
 
-with open('data.csv', 'r') as file:
-    reader = csv.reader(file)
-    header = next(reader)
-    column_index = header.index('Elo')
-    column_values = [int(row[column_index]) for row in reader]
+ls = readColumn('data.csv','Elo')
 
-print(column_values)
-root = BSTNode(column_values[0])
-for i in column_values:
-    insertMany(root, BSTNode(i))
+root = BSTNode(ls[0])
+
+insertMany(root, ls)
 
 resPre, resIn, resPs = [], [], []
 preOr, preIn, prePs = orderAll(root, resPre, 'PRE'), orderAll(root, resIn, 'IN'), orderAll(root, resPs, 'POST')
@@ -22,13 +16,6 @@ indexMap(resIn, resPre,vert)
 
 print("PreOrder: ",resPre)
 print("InOrder: ",resIn)
-print("PostOrder: ",resPs)
+print("PostOrder: ",resPs,"\n")
 
-for x in vert:
-    for y in vert[x]:
-        ls = ['']*len(vert)
-        if x == vert[x][vert[x].index(y)]:
-            ls[vert[x].index(y)] = x
-            print(ls)
-        
-        ls = []
+printMap(vert)
