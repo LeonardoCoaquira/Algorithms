@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Input Example</title>
+  <meta charset="UTF-8">
+  <title>Formulario AJAX</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <input type="text" id="myInput">
-    <button onclick="sendData()">Enviar</button>
-    <p id="myText"></p>
-    
-    <script>
-        function sendData() {
-            var text = document.getElementById("myInput").value;
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("myText").innerHTML = this.responseText;
-                }
-            };
-            xhttp.open("GET", "/get_data?text=" + text, true);
-            xhttp.send();
-        }
-    </script>
+  <h1>Formulario AJAX</h1>
+  <form id="my-form">
+    <label for="text-input">Ingresa texto:</label>
+    <input type="text" id="text-input" name="text-input" />
+    <button type="submit">Enviar</button>
+  </form>
+  <div id="result"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
