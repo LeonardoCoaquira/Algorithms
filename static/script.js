@@ -1,20 +1,12 @@
-$(document).ready(function() {
-    $('#my-form').submit(function(event) {
-      // Detener la acción por defecto de enviar el formulario
-      event.preventDefault();
-  
-      // Obtener los datos del formulario
-      var formData = $('#my-form').serialize();
-  
-      // Hacer la petición AJAX
-      $.ajax({
-        type: 'POST',
-        url: '/submit',
-        data: $('#formulario').serialize(),
-        success: function(response) {
-          $('#result').html(response.tabla);
-        }
-      });
+const but = document.getElementById("boton");
+const div = document.getElementById("result");
+
+div.addEventListener('click', () => {
+  const num = 42;
+  fetch(`http://127.0.0.1:8080/table/${num}`)
+    .then(response => response.text())
+    .then(data => {
+      fetchResult.innerHTML = data;
     });
-  });
+});
   
